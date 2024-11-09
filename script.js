@@ -25,12 +25,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    emailjs.init("UOvdq5YehBubpOE4K");
+    
     // Funcionalidad para el formulario de cita
     const citaForm = document.getElementById('citaForm');
     citaForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        // Envía el formulario con EmailJS
+        emailjs.sendForm('service_75r5jwj', 'template_ugaum3k', this)
+        .then(function(response) {
+            alert('Correo enviado correctamente');
+            console.log('Success:', response.status, response.text);
+        }, function(error) {
+            alert('Hubo un problema al enviar el correo');
+            console.error('Error:', error);
+        });
         alert('Gracias por agendar una cita. Te contactaremos pronto.');
-        citaForm.reset();
+        // citaForm.reset();
     });
 
     // Datos de las marcas de vehículos
